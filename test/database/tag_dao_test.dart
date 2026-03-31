@@ -1,9 +1,7 @@
 // test/database/tag_dao_test.dart
 import 'package:flutter_test/flutter_test.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
-import 'package:sqflite/sqflite.dart';
 import 'package:learning_vault/database/tag_dao.dart';
-import 'package:learning_vault/models/tag.dart';
 
 Future<Database> createTestDb() async {
   sqfliteFfiInit();
