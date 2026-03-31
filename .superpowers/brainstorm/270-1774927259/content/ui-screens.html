@@ -1,0 +1,246 @@
+<h2>App 畫面設計</h2>
+<p class="subtitle">6 個主要畫面 — 點選你想討論或調整的</p>
+
+<div class="cards" data-multiselect>
+
+  <!-- Screen 1: Home -->
+  <div class="card" data-choice="home" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+          <span style="font-size:18px;font-weight:bold;color:#fff;">📚 學習庫</span>
+          <span style="color:#888;font-size:20px;">🔍 ⚙️</span>
+        </div>
+        <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+          <span style="background:#2a2a4a;padding:4px 12px;border-radius:16px;font-size:12px;color:#7fd8be;">全部</span>
+          <span style="background:#1a1a2e;padding:4px 12px;border-radius:16px;font-size:12px;">Instagram</span>
+          <span style="background:#1a1a2e;padding:4px 12px;border-radius:16px;font-size:12px;">YouTube</span>
+          <span style="background:#1a1a2e;padding:4px 12px;border-radius:16px;font-size:12px;">Facebook</span>
+          <span style="background:#1a1a2e;padding:4px 12px;border-radius:16px;font-size:12px;">TikTok</span>
+        </div>
+        <!-- Card 1 -->
+        <div style="background:#1a1a2e;border-radius:12px;padding:12px;margin-bottom:10px;">
+          <div style="display:flex;gap:10px;">
+            <div style="width:60px;height:60px;background:#2a2a4a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">▶️</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;color:#c4a7e7;margin-bottom:2px;">YouTube · 3 小時前</div>
+              <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:4px;">Flutter 狀態管理完整教學</div>
+              <div style="font-size:11px;color:#888;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">深入淺出介紹 Riverpod、Bloc 和 Provider 的差異...</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="background:#2a2a4a;padding:2px 8px;border-radius:10px;font-size:10px;color:#f6c177;">#flutter</span>
+            <span style="background:#2a2a4a;padding:2px 8px;border-radius:10px;font-size:10px;color:#f6c177;">#state-management</span>
+          </div>
+        </div>
+        <!-- Card 2 -->
+        <div style="background:#1a1a2e;border-radius:12px;padding:12px;margin-bottom:10px;">
+          <div style="display:flex;gap:10px;">
+            <div style="width:60px;height:60px;background:#2a2a4a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">📸</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;color:#eb6f92;margin-bottom:2px;">Instagram · 昨天</div>
+              <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:4px;">UI 設計 10 個實用技巧</div>
+              <div style="font-size:11px;color:#888;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">配色、間距、對齊，從基礎開始掌握...</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="background:#2a2a4a;padding:2px 8px;border-radius:10px;font-size:10px;color:#f6c177;">#design</span>
+            <span style="background:#2a2a4a;padding:2px 8px;border-radius:10px;font-size:10px;color:#f6c177;">#ui</span>
+          </div>
+        </div>
+        <!-- Card 3 -->
+        <div style="background:#1a1a2e;border-radius:12px;padding:12px;">
+          <div style="display:flex;gap:10px;">
+            <div style="width:60px;height:60px;background:#2a2a4a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;">🎵</div>
+            <div style="flex:1;min-width:0;">
+              <div style="font-size:11px;color:#9ccfd8;margin-bottom:2px;">TikTok · 2 天前</div>
+              <div style="font-size:13px;color:#fff;font-weight:500;margin-bottom:4px;">30 秒學會 Git Rebase</div>
+              <div style="font-size:11px;color:#888;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;">快速搞懂 rebase 和 merge 的差別...</div>
+            </div>
+          </div>
+          <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="background:#2a2a4a;padding:2px 8px;border-radius:10px;font-size:10px;color:#f6c177;">#git</span>
+          </div>
+        </div>
+        <!-- Bottom Nav -->
+        <div style="display:flex;justify-content:space-around;margin-top:16px;padding-top:12px;border-top:1px solid #2a2a4a;font-size:11px;color:#888;">
+          <span style="color:#7fd8be;">🏠 首頁</span>
+          <span>🏷️ 標籤</span>
+          <span>🔍 搜尋</span>
+          <span>⚙️ 設定</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>首頁 — 時間軸</h3>
+      <p>所有內容按時間排列，頂部有平台篩選 chips。每張卡片顯示縮圖、平台、標題、摘要預覽和標籤。</p>
+    </div>
+  </div>
+
+  <!-- Screen 2: Detail -->
+  <div class="card" data-choice="detail" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+          <span style="color:#888;">← 返回</span>
+          <span style="flex:1;"></span>
+          <span style="color:#888;">🔗 開啟原文</span>
+        </div>
+        <div style="width:100%;height:80px;background:#2a2a4a;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:12px;">▶️</div>
+        <div style="font-size:11px;color:#c4a7e7;margin-bottom:4px;">YouTube · 2024-03-31</div>
+        <div style="font-size:16px;color:#fff;font-weight:bold;margin-bottom:8px;">Flutter 狀態管理完整教學</div>
+        <div style="font-size:12px;color:#888;margin-bottom:12px;">原始描述：深入淺出介紹 Riverpod、Bloc 和 Provider...</div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:12px;margin-bottom:12px;">
+          <div style="font-size:12px;color:#7fd8be;font-weight:500;margin-bottom:6px;">✨ AI 摘要</div>
+          <div style="font-size:12px;color:#ddd;line-height:1.6;">
+            • Riverpod 適合中大型專案，型別安全<br>
+            • Provider 簡單但大型專案難維護<br>
+            • Bloc 學習曲線高但結構清晰<br>
+            • 建議新手從 Riverpod 開始
+          </div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:12px;margin-bottom:12px;">
+          <div style="font-size:12px;color:#f6c177;font-weight:500;margin-bottom:6px;">📝 我的筆記</div>
+          <div style="font-size:12px;color:#ddd;line-height:1.6;">下次開新專案試試 Riverpod，先看官方文件</div>
+        </div>
+        <div style="display:flex;gap:6px;flex-wrap:wrap;">
+          <span style="background:#2a2a4a;padding:3px 10px;border-radius:10px;font-size:11px;color:#f6c177;">#flutter</span>
+          <span style="background:#2a2a4a;padding:3px 10px;border-radius:10px;font-size:11px;color:#f6c177;">#state-management</span>
+          <span style="border:1px dashed #444;padding:3px 10px;border-radius:10px;font-size:11px;color:#888;">+ 新標籤</span>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>內容詳情頁</h3>
+      <p>完整 metadata + AI 摘要 + 筆記編輯 + 標籤管理。頂部可一鍵跳回原始平台。</p>
+    </div>
+  </div>
+
+  <!-- Screen 3: Tags -->
+  <div class="card" data-choice="tags" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="font-size:18px;font-weight:bold;color:#fff;margin-bottom:16px;">🏷️ 標籤</div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;">
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#flutter <span style="color:#888;font-size:11px;">12</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#design <span style="color:#888;font-size:11px;">8</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#git <span style="color:#888;font-size:11px;">5</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#ui <span style="color:#888;font-size:11px;">5</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#state-management <span style="color:#888;font-size:11px;">4</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#backend <span style="color:#888;font-size:11px;">3</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#react <span style="color:#888;font-size:11px;">2</span></span>
+          <span style="background:#2a2a4a;padding:6px 14px;border-radius:16px;font-size:13px;color:#f6c177;">#database <span style="color:#888;font-size:11px;">2</span></span>
+        </div>
+        <div style="margin-top:20px;border-top:1px solid #2a2a4a;padding-top:12px;">
+          <div style="font-size:12px;color:#888;margin-bottom:8px;">點選 #flutter 後顯示：</div>
+          <div style="background:#1a1a2e;border-radius:12px;padding:10px;margin-bottom:6px;font-size:12px;">
+            <span style="color:#c4a7e7;">YT</span> · Flutter 狀態管理完整教學
+          </div>
+          <div style="background:#1a1a2e;border-radius:12px;padding:10px;margin-bottom:6px;font-size:12px;">
+            <span style="color:#9ccfd8;">TT</span> · Widget 生命週期 60 秒搞懂
+          </div>
+          <div style="background:#1a1a2e;border-radius:12px;padding:10px;font-size:12px;">
+            <span style="color:#c4a7e7;">YT</span> · Dart 非同步程式設計
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>標籤瀏覽頁</h3>
+      <p>所有標籤以 chip cloud 呈現，顯示各標籤的內容數量。點選標籤展開相關內容列表。</p>
+    </div>
+  </div>
+
+  <!-- Screen 4: Search -->
+  <div class="card" data-choice="search" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="font-size:18px;font-weight:bold;color:#fff;margin-bottom:12px;">🔍 搜尋</div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:10px;margin-bottom:16px;color:#888;">搜尋標題、摘要、筆記...</div>
+        <div style="font-size:12px;color:#888;margin-bottom:8px;">搜尋範圍：標題 + AI 摘要 + 筆記內容 + 標籤</div>
+        <div style="font-size:11px;color:#666;margin-top:12px;">全文搜尋，使用 SQLite FTS</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>搜尋頁</h3>
+      <p>全文搜尋標題、AI 摘要、筆記、標籤。即時顯示結果。</p>
+    </div>
+  </div>
+
+  <!-- Screen 5: Share receive -->
+  <div class="card" data-choice="share" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="font-size:16px;font-weight:bold;color:#fff;margin-bottom:12px;">儲存到學習庫</div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:12px;margin-bottom:12px;">
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">連結</div>
+          <div style="font-size:12px;color:#7fd8be;">https://youtube.com/watch?v=abc123</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:12px;margin-bottom:12px;">
+          <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+            <div style="width:10px;height:10px;border:2px solid #7fd8be;border-top-color:transparent;border-radius:50%;"></div>
+            <span style="font-size:12px;color:#7fd8be;">正在擷取資訊...</span>
+          </div>
+          <div style="font-size:12px;color:#ddd;">✅ 平台辨識：YouTube</div>
+          <div style="font-size:12px;color:#ddd;">✅ Metadata 擷取完成</div>
+          <div style="font-size:12px;color:#888;">⏳ AI 摘要生成中...</div>
+        </div>
+        <div style="background:#1a1a2e;border-radius:8px;padding:12px;margin-bottom:12px;">
+          <div style="font-size:11px;color:#888;margin-bottom:4px;">快速筆記（選填）</div>
+          <div style="font-size:12px;color:#666;border-bottom:1px solid #333;padding-bottom:8px;">輸入筆記...</div>
+        </div>
+        <div style="display:flex;gap:6px;margin-bottom:12px;">
+          <span style="border:1px dashed #444;padding:3px 10px;border-radius:10px;font-size:11px;color:#888;">+ 新增標籤</span>
+        </div>
+        <div style="background:#7fd8be;color:#0f0f1a;text-align:center;padding:10px;border-radius:8px;font-weight:bold;font-size:14px;">儲存</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>分享接收頁</h3>
+      <p>從其他 app 分享進來後的處理畫面。自動擷取 metadata 和生成 AI 摘要，可即時加筆記和標籤。</p>
+    </div>
+  </div>
+
+  <!-- Screen 6: Settings -->
+  <div class="card" data-choice="settings" onclick="toggleSelect(this)">
+    <div class="card-image">
+      <div style="background:#0f0f1a;padding:16px;border-radius:8px;font-size:13px;color:#ccc;line-height:1.6;">
+        <div style="font-size:18px;font-weight:bold;color:#fff;margin-bottom:16px;">⚙️ 設定</div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;color:#888;margin-bottom:8px;">AI 服務</div>
+          <div style="background:#1a1a2e;border-radius:8px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;">
+            <span>目前使用</span>
+            <span style="color:#7fd8be;">Claude ▼</span>
+          </div>
+        </div>
+        <div style="margin-bottom:16px;">
+          <div style="font-size:12px;color:#888;margin-bottom:8px;">API Keys</div>
+          <div style="background:#1a1a2e;border-radius:8px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;">
+            <span>OpenAI</span>
+            <span style="color:#7fd8be;">已設定 ✓</span>
+          </div>
+          <div style="background:#1a1a2e;border-radius:8px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;">
+            <span>Claude</span>
+            <span style="color:#7fd8be;">已設定 ✓</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-size:12px;color:#888;margin-bottom:8px;">資料</div>
+          <div style="background:#1a1a2e;border-radius:8px;padding:10px;margin-bottom:6px;display:flex;justify-content:space-between;">
+            <span>已儲存內容</span>
+            <span style="color:#888;">27 則</span>
+          </div>
+          <div style="background:#1a1a2e;border-radius:8px;padding:10px;display:flex;justify-content:space-between;">
+            <span>匯出資料</span>
+            <span style="color:#888;">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>設定頁</h3>
+      <p>選擇 AI provider、管理 API key、查看儲存統計。</p>
+    </div>
+  </div>
+
+</div>

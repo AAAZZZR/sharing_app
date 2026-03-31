@@ -1,0 +1,81 @@
+<h2>三個架構方案</h2>
+<p class="subtitle">選擇最適合你的架構方向</p>
+
+<div class="section">
+  <h3>需求總結</h3>
+  <p>從社群 app（IG、FB、YT、抖音）分享連結 → 自動擷取 metadata + AI 摘要 → 純文字筆記 + 標籤 → 多種瀏覽方式 → 本地儲存 → Flutter 練習</p>
+</div>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>全本地架構 ⭐ 推薦</h3>
+      <p>AI 呼叫直接從手機端發出，資料全存本地 SQLite。不需要後端伺服器。</p>
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.8;color:#ccc;">
+        社群 App → 分享連結 → <span style="color:#7fd8be;">Flutter App</span><br>
+        &nbsp;&nbsp;→ 手機端 HTTP 抓 metadata<br>
+        &nbsp;&nbsp;→ 手機端直接呼叫 AI API（OpenAI / Claude）<br>
+        &nbsp;&nbsp;→ 存入本地 <span style="color:#f6c177;">SQLite</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>架構最簡單，專注練 Flutter</li>
+          <li>零伺服器成本</li>
+          <li>之後加雲端同步不衝突</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>API key 存手機端（個人用 OK）</li>
+          <li>某些平台 metadata 爬取可能受限</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>輕量後端架構</h3>
+      <p>用小後端處理爬取和 AI 呼叫，Flutter 只做 UI 和本地儲存。</p>
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.8;color:#ccc;">
+        <span style="color:#7fd8be;">Flutter App</span> → 發送連結給<span style="color:#c4a7e7;">後端 API</span><br>
+        &nbsp;&nbsp;→ 後端爬取 metadata + 呼叫 AI<br>
+        &nbsp;&nbsp;→ 回傳結果 → 存入本地 <span style="color:#f6c177;">SQLite</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>API key 安全放後端</li>
+          <li>爬取 metadata 更穩定</li>
+          <li>可快取，相同連結不重複處理</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>需架設後端，不純粹練 Flutter</li>
+          <li>有伺服器成本</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>混合架構</h3>
+      <p>metadata 手機端抓，AI 呼叫透過 Cloud Functions 轉發，不需完整後端。</p>
+      <div style="background:#1a1a2e;padding:12px;border-radius:8px;margin:12px 0;font-family:monospace;font-size:13px;line-height:1.8;color:#ccc;">
+        <span style="color:#7fd8be;">Flutter App</span> → 手機端抓 metadata<br>
+        &nbsp;&nbsp;→ <span style="color:#c4a7e7;">Cloud Function</span> 轉發 AI API 呼叫<br>
+        &nbsp;&nbsp;→ 結果存本地 <span style="color:#f6c177;">SQLite</span>
+      </div>
+      <div class="pros-cons">
+        <div class="pros"><h4>Pros</h4><ul>
+          <li>API key 不暴露在手機端</li>
+          <li>Cloud Functions 免費額度夠用</li>
+        </ul></div>
+        <div class="cons"><h4>Cons</h4><ul>
+          <li>仍需設定雲端服務</li>
+          <li>比方案 A 複雜</li>
+        </ul></div>
+      </div>
+    </div>
+  </div>
+</div>

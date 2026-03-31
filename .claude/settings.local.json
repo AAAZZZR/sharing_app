@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bash \"C:/Users/Owner/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.6/scripts/start-server.sh\" --project-dir \"C:/Users/Owner/Desktop/flutter_practice\")",
+      "Bash(bash \"C:/Users/Owner/.claude/plugins/cache/claude-plugins-official/superpowers/5.0.6/skills/brainstorming/scripts/start-server.sh\" --project-dir \"C:/Users/Owner/Desktop/flutter_practice\")",
+      "Bash(cat \"C:/Users/Owner/Desktop/flutter_practice/.superpowers/brainstorm/\"*/state/server-info)",
+      "Bash(flutter --version)",
+      "Bash(flutter create:*)",
+      "Bash(git init:*)",
+      "Bash(git commit:*)"
+    ]
+  }
+}
