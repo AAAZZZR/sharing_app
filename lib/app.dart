@@ -3,6 +3,8 @@ import 'package:learning_vault/screens/home_screen.dart';
 import 'package:learning_vault/screens/tags_screen.dart';
 import 'package:learning_vault/screens/search_screen.dart';
 import 'package:learning_vault/screens/settings_screen.dart';
+import 'package:learning_vault/screens/share_receive_screen.dart';
+import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
 class LearningVaultApp extends StatelessWidget {
   const LearningVaultApp({super.key});
@@ -40,6 +42,42 @@ class AppShell extends StatefulWidget {
 
 class _AppShellState extends State<AppShell> {
   int _currentIndex = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _setupShareIntent();
+  }
+
+  void _setupShareIntent() {
+    ReceiveSharingIntent.instance
+        .getInitialMedia()
+        .then((List<SharedMediaFile> value) {
+      final url = _extractUrl(value);
+      if (url != null) _openShareReceive(url);
+    });
+
+    ReceiveSharingIntent.instance
+        .getMediaStream()
+        .listen((List<SharedMediaFile> value) {
+      final url = _extractUrl(value);
+      if (url != null) _openShareReceive(url);
+    });
+  }
+
+  String? _extractUrl(List<SharedMediaFile> files) {
+    if (files.isEmpty) return null;
+    final text = files.first.path;
+    final urlPattern = RegExp(r'https?://\S+');
+    final match = urlPattern.firstMatch(text);
+    return match?.group(0) ?? text;
+  }
+
+  void _openShareReceive(String url) {
+    Navigator.of(context).push(
+      MaterialPageRoute(builder: (_) => ShareReceiveScreen(sharedUrl: url)),
+    );
+  }
 
   final _screens = const [
     HomeScreen(),
