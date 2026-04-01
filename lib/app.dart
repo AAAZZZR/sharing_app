@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_vault/l10n/app_localizations.dart';
+import 'package:learning_vault/providers/settings_provider.dart';
 import 'package:learning_vault/screens/home_screen.dart';
 import 'package:learning_vault/screens/tags_screen.dart';
 import 'package:learning_vault/screens/search_screen.dart';
@@ -7,12 +9,15 @@ import 'package:learning_vault/screens/settings_screen.dart';
 import 'package:learning_vault/screens/share_receive_screen.dart';
 import 'package:receive_sharing_intent/receive_sharing_intent.dart';
 
-class LearningVaultApp extends StatelessWidget {
+class LearningVaultApp extends ConsumerWidget {
   const LearningVaultApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final locale = ref.watch(localeProvider);
+
     return MaterialApp(
+      locale: locale,
       title: 'Learning Vault',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: AppLocalizations.localizationsDelegates,
@@ -82,6 +87,45 @@ class _AppShellState extends State<AppShell> {
     );
   }
 
+  void _showAddLinkDialog(AppLocalizations l10n) {
+    final controller = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (ctx) => AlertDialog(
+        title: Text(l10n.addLink),
+        content: TextField(
+          controller: controller,
+          autofocus: true,
+          decoration: InputDecoration(hintText: l10n.pasteLinkHint),
+          onSubmitted: (value) {
+            final url = value.trim();
+            if (url.isNotEmpty) {
+              Navigator.pop(ctx);
+              _openShareReceive(url);
+            }
+          },
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(ctx),
+            child: Text(l10n.cancel),
+          ),
+          TextButton(
+            onPressed: () {
+              final url = controller.text.trim();
+              if (url.isNotEmpty) {
+                Navigator.pop(ctx);
+                _openShareReceive(url);
+              }
+            },
+            child: Text(l10n.save),
+          ),
+        ],
+      ),
+    );
+  }
+
   final _screens = const [
     HomeScreen(),
     TagsScreen(),
@@ -95,6 +139,11 @@ class _AppShellState extends State<AppShell> {
 
     return Scaffold(
       body: _screens[_currentIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => _showAddLinkDialog(l10n),
+        backgroundColor: const Color(0xFF7FD8BE),
+        child: const Icon(Icons.add, color: Color(0xFF0F0F1A)),
+      ),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: (index) => setState(() => _currentIndex = index),

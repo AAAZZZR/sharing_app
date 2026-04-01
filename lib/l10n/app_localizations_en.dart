@@ -178,4 +178,19 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get loading => '...';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get langZh => '繁體中文';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get addLink => 'Add Link';
+
+  @override
+  String get pasteLinkHint => 'Paste URL here...';
 }

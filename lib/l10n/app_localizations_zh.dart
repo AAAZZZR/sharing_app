@@ -177,6 +177,21 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get loading => '...';
+
+  @override
+  String get language => '語言';
+
+  @override
+  String get langZh => '繁體中文';
+
+  @override
+  String get langEn => 'English';
+
+  @override
+  String get addLink => '新增連結';
+
+  @override
+  String get pasteLinkHint => '貼上網址...';
 }
 
 /// The translations for Chinese, as used in China (`zh_CN`).

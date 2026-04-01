@@ -410,6 +410,36 @@ abstract class AppLocalizations {
   /// In zh, this message translates to:
   /// **'...'**
   String get loading;
+
+  /// No description provided for @language.
+  ///
+  /// In zh, this message translates to:
+  /// **'語言'**
+  String get language;
+
+  /// No description provided for @langZh.
+  ///
+  /// In zh, this message translates to:
+  /// **'繁體中文'**
+  String get langZh;
+
+  /// No description provided for @langEn.
+  ///
+  /// In zh, this message translates to:
+  /// **'English'**
+  String get langEn;
+
+  /// No description provided for @addLink.
+  ///
+  /// In zh, this message translates to:
+  /// **'新增連結'**
+  String get addLink;
+
+  /// No description provided for @pasteLinkHint.
+  ///
+  /// In zh, this message translates to:
+  /// **'貼上網址...'**
+  String get pasteLinkHint;
 }
 
 class _AppLocalizationsDelegate

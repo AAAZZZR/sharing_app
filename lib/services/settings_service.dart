@@ -31,4 +31,12 @@ class SettingsService {
     final key = await getApiKey(provider);
     return key != null && key.isNotEmpty;
   }
+
+  Future<String?> getLocale() async {
+    return _storage.read(key: 'locale');
+  }
+
+  Future<void> setLocale(String locale) async {
+    await _storage.write(key: 'locale', value: locale);
+  }
 }

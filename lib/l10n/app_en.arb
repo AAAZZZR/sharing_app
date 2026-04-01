@@ -86,5 +86,10 @@
     }
   },
   "error": "Error",
-  "loading": "..."
+  "loading": "...",
+  "language": "Language",
+  "langZh": "繁體中文",
+  "langEn": "English",
+  "addLink": "Add Link",
+  "pasteLinkHint": "Paste URL here..."
 }

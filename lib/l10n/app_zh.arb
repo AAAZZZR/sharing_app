@@ -86,5 +86,10 @@
     }
   },
   "error": "錯誤",
-  "loading": "..."
+  "loading": "...",
+  "language": "語言",
+  "langZh": "繁體中文",
+  "langEn": "English",
+  "addLink": "新增連結",
+  "pasteLinkHint": "貼上網址..."
 }

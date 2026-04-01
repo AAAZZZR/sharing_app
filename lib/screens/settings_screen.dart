@@ -49,6 +49,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
   Widget build(BuildContext context) {
     final l10n = AppLocalizations.of(context)!;
     final currentProvider = ref.watch(aiProviderProvider);
+    final currentLocale = ref.watch(localeProvider);
     final contentAsync = ref.watch(contentListProvider);
 
     return SafeArea(
@@ -79,6 +80,32 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
                   onChanged: (value) {
                     if (value != null) {
                       ref.read(aiProviderProvider.notifier).setProvider(value);
+                    }
+                  },
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+
+            // Language selection
+            Text(l10n.language, style: const TextStyle(fontSize: 12, color: Colors.grey)),
+            const SizedBox(height: 8),
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
+              decoration: BoxDecoration(color: const Color(0xFF1A1A2E), borderRadius: BorderRadius.circular(8)),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton<Locale>(
+                  value: currentLocale ?? const Locale('zh'),
+                  dropdownColor: const Color(0xFF1A1A2E),
+                  style: const TextStyle(color: Color(0xFF7FD8BE)),
+                  items: [
+                    DropdownMenuItem(value: const Locale('zh'), child: Text(l10n.langZh)),
+                    DropdownMenuItem(value: const Locale('en'), child: Text(l10n.langEn)),
+                  ],
+                  onChanged: (value) {
+                    if (value != null) {
+                      ref.read(localeProvider.notifier).setLocale(value);
                     }
                   },
                 ),

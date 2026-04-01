@@ -33,7 +33,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Text(l10n.homeTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 16),
             SizedBox(
-              height: 32,
+              height: 40,
               child: ListView.separated(
                 scrollDirection: Axis.horizontal,
                 itemCount: _platforms.length,
