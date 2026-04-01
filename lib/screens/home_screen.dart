@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/providers/content_provider.dart';
 import 'package:learning_vault/providers/tag_provider.dart';
 import 'package:learning_vault/widgets/content_card.dart';
@@ -20,6 +21,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final contentAsync = ref.watch(contentListProvider);
 
     return SafeArea(
@@ -28,7 +30,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('學習庫', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.homeTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 16),
             SizedBox(
               height: 32,
@@ -39,7 +41,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                 itemBuilder: (context, index) {
                   final platform = _platforms[index];
                   return PlatformChip(
-                    label: platform == 'all' ? '全部' : PlatformChip.labelForPlatform(platform),
+                    label: platform == 'all' ? l10n.filterAll : PlatformChip.labelForPlatform(platform),
                     selected: _selectedPlatform == platform,
                     onTap: () {
                       setState(() => _selectedPlatform = platform);
@@ -57,11 +59,11 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: contentAsync.when(
                 loading: () => const Center(child: CircularProgressIndicator()),
-                error: (err, _) => Center(child: Text('錯誤：$err')),
+                error: (err, _) => Center(child: Text(l10n.errorMessage(err.toString()))),
                 data: (contents) {
                   if (contents.isEmpty) {
-                    return const Center(
-                      child: Text('還沒有內容\n從其他 app 分享連結到這裡', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)),
+                    return Center(
+                      child: Text(l10n.homeEmpty, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey)),
                     );
                   }
                   return ListView.builder(

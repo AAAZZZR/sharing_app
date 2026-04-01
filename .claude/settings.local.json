@@ -7,7 +7,15 @@
       "Bash(flutter --version)",
       "Bash(flutter create:*)",
       "Bash(git init:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(flutter pub:*)",
+      "Bash(flutter analyze:*)",
+      "Bash(flutter test:*)",
+      "Bash(find /c/Users/Owner/Desktop/flutter_practice/lib/screens -type f -name *.dart)",
+      "Bash(flutter gen-l10n:*)",
+      "Bash(flutter devices:*)",
+      "Bash(flutter emulators:*)",
+      "Bash(\"$LOCALAPPDATA/Android/sdk/emulator/emulator.exe\" -list-avds 2>&1)"
     ]
   }
 }

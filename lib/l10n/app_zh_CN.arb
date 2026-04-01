@@ -1,0 +1,90 @@
+{
+  "@@locale": "zh_CN",
+  "appTitle": "学习库",
+  "navHome": "首页",
+  "navTags": "标签",
+  "navSearch": "搜索",
+  "navSettings": "设置",
+  "homeTitle": "学习库",
+  "filterAll": "全部",
+  "homeEmpty": "还没有内容\n从其他 app 分享链接到这里",
+  "openOriginal": "打开原文",
+  "aiSummary": "AI 摘要",
+  "myNotes": "我的笔记",
+  "noteHint": "输入笔记...",
+  "addNewTag": "+ 新标签",
+  "addTagTitle": "新增标签",
+  "tagNameHint": "标签名称",
+  "cancel": "取消",
+  "add": "新增",
+  "contentNotFound": "内容不存在",
+  "searchTitle": "搜索",
+  "searchHint": "搜索标题、摘要、笔记...",
+  "searchEmpty": "输入关键字搜索\n搜索范围：标题、AI 摘要、笔记",
+  "searchNoResults": "找不到相关内容",
+  "settingsTitle": "设置",
+  "aiService": "AI 服务",
+  "apiKeys": "API Keys",
+  "dataSection": "数据",
+  "savedContent": "已保存内容",
+  "contentCount": "{count} 条",
+  "@contentCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "apiKeySet": "已设定 ✓",
+  "apiKeyNotSet": "未设定",
+  "pasteApiKey": "粘贴 API Key",
+  "saveToVault": "保存到学习库",
+  "link": "链接",
+  "platformDetected": "平台识别：{platform}",
+  "@platformDetected": {
+    "placeholders": {
+      "platform": {"type": "String"}
+    }
+  },
+  "detecting": "识别中...",
+  "metadataLoading": "Metadata 提取中...",
+  "metadataDone": "Metadata 提取完成",
+  "aiSummaryLoading": "AI 摘要生成中...",
+  "aiSummaryDone": "AI 摘要完成",
+  "quickNote": "快速笔记（选填）",
+  "save": "保存",
+  "noApiKey": "未设定 API Key，请到设置页设定",
+  "aiSummaryError": "AI 摘要失败：{error}",
+  "@aiSummaryError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "tagsTitle": "标签",
+  "noTags": "还没有标签",
+  "daysAgo": "{count} 天前",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hoursAgo": "{count} 小时前",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "minutesAgo": "{count} 分钟前",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "justNow": "刚刚",
+  "errorMessage": "错误：{error}",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "error": "错误",
+  "loading": "..."
+}

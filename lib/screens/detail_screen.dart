@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/providers/content_provider.dart';
 import 'package:learning_vault/providers/tag_provider.dart';
 import 'package:learning_vault/widgets/platform_chip.dart';
@@ -61,16 +62,17 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final contentAsync = ref.watch(contentListProvider);
     final tagsAsync = ref.watch(contentTagsProvider(widget.contentId));
 
     return contentAsync.when(
       loading: () => const Scaffold(body: Center(child: CircularProgressIndicator())),
-      error: (err, _) => Scaffold(body: Center(child: Text('錯誤：$err'))),
+      error: (err, _) => Scaffold(body: Center(child: Text(l10n.errorMessage(err.toString())))),
       data: (contents) {
         final content = contents.where((c) => c.id == widget.contentId).firstOrNull;
         if (content == null) {
-          return const Scaffold(body: Center(child: Text('內容不存在')));
+          return Scaffold(body: Center(child: Text(l10n.contentNotFound)));
         }
 
         if (!_noteChanged) {
@@ -83,7 +85,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
               TextButton.icon(
                 onPressed: () => launchUrl(Uri.parse(content.url)),
                 icon: const Icon(Icons.open_in_new, size: 16),
-                label: const Text('開啟原文'),
+                label: Text(l10n.openOriginal),
               ),
             ],
           ),
@@ -133,7 +135,7 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('AI 摘要', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF7FD8BE))),
+                        Text(l10n.aiSummary, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFF7FD8BE))),
                         const SizedBox(height: 8),
                         Text(content.aiSummary!, style: const TextStyle(fontSize: 13, color: Colors.white70, height: 1.6)),
                       ],
@@ -150,16 +152,16 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('我的筆記', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFFF6C177))),
+                      Text(l10n.myNotes, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w500, color: Color(0xFFF6C177))),
                       const SizedBox(height: 8),
                       TextField(
                         controller: _noteController,
                         onChanged: (_) => _noteChanged = true,
                         maxLines: null,
                         style: const TextStyle(fontSize: 13, color: Colors.white70),
-                        decoration: const InputDecoration(
-                          hintText: '輸入筆記...',
-                          hintStyle: TextStyle(color: Colors.grey),
+                        decoration: InputDecoration(
+                          hintText: l10n.noteHint,
+                          hintStyle: const TextStyle(color: Colors.grey),
                           border: InputBorder.none,
                         ),
                       ),
@@ -185,14 +187,14 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
                         },
                       )),
                       GestureDetector(
-                        onTap: () => _showAddTagDialog(),
+                        onTap: () => _showAddTagDialog(l10n),
                         child: Container(
                           padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey.shade700),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Text('+ 新標籤', style: TextStyle(fontSize: 12, color: Colors.grey)),
+                          child: Text(l10n.addNewTag, style: const TextStyle(fontSize: 12, color: Colors.grey)),
                         ),
                       ),
                     ],
@@ -206,28 +208,28 @@ class _DetailScreenState extends ConsumerState<DetailScreen> {
     );
   }
 
-  void _showAddTagDialog() {
+  void _showAddTagDialog(AppLocalizations l10n) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('新增標籤'),
+        title: Text(l10n.addTagTitle),
         content: TextField(
           controller: _tagInputController,
           autofocus: true,
-          decoration: const InputDecoration(hintText: '標籤名稱'),
+          decoration: InputDecoration(hintText: l10n.tagNameHint),
           onSubmitted: (_) {
             _addTag();
             Navigator.pop(context);
           },
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancel)),
           TextButton(
             onPressed: () {
               _addTag();
               Navigator.pop(context);
             },
-            child: const Text('新增'),
+            child: Text(l10n.add),
           ),
         ],
       ),

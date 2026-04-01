@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/services/settings_service.dart';
 import 'package:learning_vault/providers/settings_provider.dart';
 import 'package:learning_vault/providers/content_provider.dart';
@@ -46,6 +47,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final currentProvider = ref.watch(aiProviderProvider);
     final contentAsync = ref.watch(contentListProvider);
 
@@ -55,11 +57,11 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('設定', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.settingsTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 24),
 
             // AI provider selection
-            const Text('AI 服務', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(l10n.aiService, style: const TextStyle(fontSize: 12, color: Colors.grey)),
             const SizedBox(height: 8),
             Container(
               width: double.infinity,
@@ -85,15 +87,15 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
             const SizedBox(height: 24),
 
             // API Keys
-            const Text('API Keys', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(l10n.apiKeys, style: const TextStyle(fontSize: 12, color: Colors.grey)),
             const SizedBox(height: 8),
-            _apiKeyTile(label: 'OpenAI', hasKey: _openaiHasKey, onTap: () => _showKeyDialog(AiProvider.openai, 'OpenAI API Key')),
+            _apiKeyTile(l10n: l10n, label: 'OpenAI', hasKey: _openaiHasKey, onTap: () => _showKeyDialog(l10n, AiProvider.openai, 'OpenAI API Key')),
             const SizedBox(height: 6),
-            _apiKeyTile(label: 'Claude', hasKey: _claudeHasKey, onTap: () => _showKeyDialog(AiProvider.claude, 'Claude API Key')),
+            _apiKeyTile(l10n: l10n, label: 'Claude', hasKey: _claudeHasKey, onTap: () => _showKeyDialog(l10n, AiProvider.claude, 'Claude API Key')),
             const SizedBox(height: 24),
 
             // Stats
-            const Text('資料', style: TextStyle(fontSize: 12, color: Colors.grey)),
+            Text(l10n.dataSection, style: const TextStyle(fontSize: 12, color: Colors.grey)),
             const SizedBox(height: 8),
             Container(
               width: double.infinity,
@@ -102,9 +104,13 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text('已儲存內容'),
+                  Text(l10n.savedContent),
                   Text(
-                    contentAsync.when(data: (list) => '${list.length} 則', loading: () => '...', error: (_, __) => '錯誤'),
+                    contentAsync.when(
+                      data: (list) => l10n.contentCount(list.length),
+                      loading: () => l10n.loading,
+                      error: (_, __) => l10n.error,
+                    ),
                     style: const TextStyle(color: Colors.grey),
                   ),
                 ],
@@ -116,7 +122,7 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
     );
   }
 
-  Widget _apiKeyTile({required String label, required bool hasKey, required VoidCallback onTap}) {
+  Widget _apiKeyTile({required AppLocalizations l10n, required String label, required bool hasKey, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
@@ -127,14 +133,17 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(label),
-            Text(hasKey ? '已設定 ✓' : '未設定', style: TextStyle(color: hasKey ? const Color(0xFF7FD8BE) : Colors.grey)),
+            Text(
+              hasKey ? l10n.apiKeySet : l10n.apiKeyNotSet,
+              style: TextStyle(color: hasKey ? const Color(0xFF7FD8BE) : Colors.grey),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void _showKeyDialog(AiProvider provider, String title) {
+  void _showKeyDialog(AppLocalizations l10n, AiProvider provider, String title) {
     final controller = provider == AiProvider.openai ? _openaiKeyController : _claudeKeyController;
     controller.clear();
 
@@ -145,16 +154,16 @@ class _SettingsScreenState extends ConsumerState<SettingsScreen> {
         content: TextField(
           controller: controller,
           obscureText: true,
-          decoration: const InputDecoration(hintText: '貼上 API Key'),
+          decoration: InputDecoration(hintText: l10n.pasteApiKey),
         ),
         actions: [
-          TextButton(onPressed: () => Navigator.pop(context), child: const Text('取消')),
+          TextButton(onPressed: () => Navigator.pop(context), child: Text(l10n.cancel)),
           TextButton(
             onPressed: () {
               _saveKey(provider, controller.text.trim());
               Navigator.pop(context);
             },
-            child: const Text('儲存'),
+            child: Text(l10n.save),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/models/content.dart';
 import 'package:learning_vault/providers/content_provider.dart';
 import 'package:learning_vault/providers/tag_provider.dart';
@@ -33,6 +34,7 @@ class _TagsScreenState extends ConsumerState<TagsScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final tagsAsync = ref.watch(tagsWithCountProvider);
 
     return SafeArea(
@@ -41,16 +43,16 @@ class _TagsScreenState extends ConsumerState<TagsScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('標籤', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.tagsTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 16),
 
             // Tag cloud
             tagsAsync.when(
               loading: () => const CircularProgressIndicator(),
-              error: (err, _) => Text('錯誤：$err'),
+              error: (err, _) => Text(l10n.errorMessage(err.toString())),
               data: (tagsWithCount) {
                 if (tagsWithCount.isEmpty) {
-                  return const Text('還沒有標籤', style: TextStyle(color: Colors.grey));
+                  return Text(l10n.noTags, style: const TextStyle(color: Colors.grey));
                 }
                 return Wrap(
                   spacing: 8, runSpacing: 8,
@@ -106,11 +108,12 @@ class _TagContentList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l10n = AppLocalizations.of(context)!;
     final contentsAsync = ref.watch(contentsByTagProvider(tagId));
 
     return contentsAsync.when(
       loading: () => const Center(child: CircularProgressIndicator()),
-      error: (err, _) => Center(child: Text('錯誤：$err')),
+      error: (err, _) => Center(child: Text(l10n.errorMessage(err.toString()))),
       data: (contents) => ListView.builder(
         itemCount: contents.length,
         itemBuilder: (context, index) {

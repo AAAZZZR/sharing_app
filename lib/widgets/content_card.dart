@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/models/content.dart';
 import 'package:learning_vault/widgets/platform_chip.dart';
 
@@ -14,16 +15,17 @@ class ContentCard extends StatelessWidget {
     required this.onTap,
   });
 
-  String _timeAgo(DateTime dateTime) {
+  String _timeAgo(DateTime dateTime, AppLocalizations l10n) {
     final diff = DateTime.now().difference(dateTime);
-    if (diff.inDays > 0) return '${diff.inDays} 天前';
-    if (diff.inHours > 0) return '${diff.inHours} 小時前';
-    if (diff.inMinutes > 0) return '${diff.inMinutes} 分鐘前';
-    return '剛剛';
+    if (diff.inDays > 0) return l10n.daysAgo(diff.inDays);
+    if (diff.inHours > 0) return l10n.hoursAgo(diff.inHours);
+    if (diff.inMinutes > 0) return l10n.minutesAgo(diff.inMinutes);
+    return l10n.justNow;
   }
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
     final platformColor = PlatformChip.colorForPlatform(content.platform);
     final platformLabel = PlatformChip.labelForPlatform(content.platform);
 
@@ -57,7 +59,7 @@ class ContentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '$platformLabel · ${_timeAgo(content.createdAt)}',
+                        '$platformLabel · ${_timeAgo(content.createdAt, l10n)}',
                         style: TextStyle(fontSize: 11, color: platformColor),
                       ),
                       const SizedBox(height: 2),

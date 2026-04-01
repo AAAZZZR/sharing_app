@@ -1,0 +1,90 @@
+{
+  "@@locale": "en",
+  "appTitle": "Learning Vault",
+  "navHome": "Home",
+  "navTags": "Tags",
+  "navSearch": "Search",
+  "navSettings": "Settings",
+  "homeTitle": "Learning Vault",
+  "filterAll": "All",
+  "homeEmpty": "No content yet\nShare links from other apps",
+  "openOriginal": "Open Original",
+  "aiSummary": "AI Summary",
+  "myNotes": "My Notes",
+  "noteHint": "Enter notes...",
+  "addNewTag": "+ New Tag",
+  "addTagTitle": "Add Tag",
+  "tagNameHint": "Tag name",
+  "cancel": "Cancel",
+  "add": "Add",
+  "contentNotFound": "Content not found",
+  "searchTitle": "Search",
+  "searchHint": "Search titles, summaries, notes...",
+  "searchEmpty": "Enter keywords to search\nScope: titles, AI summaries, notes",
+  "searchNoResults": "No results found",
+  "settingsTitle": "Settings",
+  "aiService": "AI Service",
+  "apiKeys": "API Keys",
+  "dataSection": "Data",
+  "savedContent": "Saved Content",
+  "contentCount": "{count} items",
+  "@contentCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "apiKeySet": "Set ✓",
+  "apiKeyNotSet": "Not set",
+  "pasteApiKey": "Paste API Key",
+  "saveToVault": "Save to Vault",
+  "link": "Link",
+  "platformDetected": "Platform: {platform}",
+  "@platformDetected": {
+    "placeholders": {
+      "platform": {"type": "String"}
+    }
+  },
+  "detecting": "Detecting...",
+  "metadataLoading": "Extracting metadata...",
+  "metadataDone": "Metadata extracted",
+  "aiSummaryLoading": "Generating AI summary...",
+  "aiSummaryDone": "AI summary complete",
+  "quickNote": "Quick note (optional)",
+  "save": "Save",
+  "noApiKey": "API Key not set. Please configure in Settings.",
+  "aiSummaryError": "AI summary failed: {error}",
+  "@aiSummaryError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "tagsTitle": "Tags",
+  "noTags": "No tags yet",
+  "daysAgo": "{count}d ago",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hoursAgo": "{count}h ago",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "minutesAgo": "{count}m ago",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "justNow": "Just now",
+  "errorMessage": "Error: {error}",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "error": "Error",
+  "loading": "..."
+}

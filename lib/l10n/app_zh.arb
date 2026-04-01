@@ -1,0 +1,90 @@
+{
+  "@@locale": "zh",
+  "appTitle": "學習庫",
+  "navHome": "首頁",
+  "navTags": "標籤",
+  "navSearch": "搜尋",
+  "navSettings": "設定",
+  "homeTitle": "學習庫",
+  "filterAll": "全部",
+  "homeEmpty": "還沒有內容\n從其他 app 分享連結到這裡",
+  "openOriginal": "開啟原文",
+  "aiSummary": "AI 摘要",
+  "myNotes": "我的筆記",
+  "noteHint": "輸入筆記...",
+  "addNewTag": "+ 新標籤",
+  "addTagTitle": "新增標籤",
+  "tagNameHint": "標籤名稱",
+  "cancel": "取消",
+  "add": "新增",
+  "contentNotFound": "內容不存在",
+  "searchTitle": "搜尋",
+  "searchHint": "搜尋標題、摘要、筆記...",
+  "searchEmpty": "輸入關鍵字搜尋\n搜尋範圍：標題、AI 摘要、筆記",
+  "searchNoResults": "找不到相關內容",
+  "settingsTitle": "設定",
+  "aiService": "AI 服務",
+  "apiKeys": "API Keys",
+  "dataSection": "資料",
+  "savedContent": "已儲存內容",
+  "contentCount": "{count} 則",
+  "@contentCount": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "apiKeySet": "已設定 ✓",
+  "apiKeyNotSet": "未設定",
+  "pasteApiKey": "貼上 API Key",
+  "saveToVault": "儲存到學習庫",
+  "link": "連結",
+  "platformDetected": "平台辨識：{platform}",
+  "@platformDetected": {
+    "placeholders": {
+      "platform": {"type": "String"}
+    }
+  },
+  "detecting": "辨識中...",
+  "metadataLoading": "Metadata 擷取中...",
+  "metadataDone": "Metadata 擷取完成",
+  "aiSummaryLoading": "AI 摘要生成中...",
+  "aiSummaryDone": "AI 摘要完成",
+  "quickNote": "快速筆記（選填）",
+  "save": "儲存",
+  "noApiKey": "未設定 API Key，請到設定頁設定",
+  "aiSummaryError": "AI 摘要失敗：{error}",
+  "@aiSummaryError": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "tagsTitle": "標籤",
+  "noTags": "還沒有標籤",
+  "daysAgo": "{count} 天前",
+  "@daysAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "hoursAgo": "{count} 小時前",
+  "@hoursAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "minutesAgo": "{count} 分鐘前",
+  "@minutesAgo": {
+    "placeholders": {
+      "count": {"type": "int"}
+    }
+  },
+  "justNow": "剛剛",
+  "errorMessage": "錯誤：{error}",
+  "@errorMessage": {
+    "placeholders": {
+      "error": {"type": "String"}
+    }
+  },
+  "error": "錯誤",
+  "loading": "..."
+}

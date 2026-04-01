@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:learning_vault/database/database_helper.dart';
 import 'package:learning_vault/database/content_dao.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/models/content.dart';
 import 'package:learning_vault/widgets/content_card.dart';
 import 'package:learning_vault/screens/detail_screen.dart';
@@ -42,13 +43,15 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return SafeArea(
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text('搜尋', style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
+            Text(l10n.searchTitle, style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white)),
             const SizedBox(height: 16),
 
             TextField(
@@ -56,7 +59,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               onChanged: _search,
               style: const TextStyle(color: Colors.white),
               decoration: InputDecoration(
-                hintText: '搜尋標題、摘要、筆記...',
+                hintText: l10n.searchHint,
                 hintStyle: const TextStyle(color: Colors.grey),
                 prefixIcon: const Icon(Icons.search, color: Colors.grey),
                 filled: true,
@@ -70,9 +73,9 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
               child: _loading
                   ? const Center(child: CircularProgressIndicator())
                   : _results == null
-                      ? const Center(child: Text('輸入關鍵字搜尋\n搜尋範圍：標題、AI 摘要、筆記', textAlign: TextAlign.center, style: TextStyle(color: Colors.grey)))
+                      ? Center(child: Text(l10n.searchEmpty, textAlign: TextAlign.center, style: const TextStyle(color: Colors.grey)))
                       : _results!.isEmpty
-                          ? const Center(child: Text('找不到相關內容', style: TextStyle(color: Colors.grey)))
+                          ? Center(child: Text(l10n.searchNoResults, style: const TextStyle(color: Colors.grey)))
                           : ListView.builder(
                               itemCount: _results!.length,
                               itemBuilder: (context, index) {

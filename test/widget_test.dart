@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:learning_vault/app.dart';
@@ -7,6 +8,7 @@ void main() {
     await tester.pumpWidget(
       const ProviderScope(child: LearningVaultApp()),
     );
-    expect(find.text('首頁'), findsWidgets);
+    // Bottom nav is always present regardless of locale — check for home icon
+    expect(find.byIcon(Icons.home), findsWidgets);
   });
 }

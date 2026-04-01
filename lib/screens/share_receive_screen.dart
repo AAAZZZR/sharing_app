@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/models/content.dart';
 import 'package:learning_vault/services/platform_detector.dart';
 import 'package:learning_vault/services/metadata_extractor.dart';
@@ -27,7 +28,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
   String? _aiSummary;
   bool _loadingMetadata = true;
   bool _loadingAi = false;
-  String? _aiError;
+  // null = no error, empty string = no API key, non-empty = actual error message
+  String? _aiRawError;
+  bool _noApiKey = false;
 
   @override
   void initState() {
@@ -72,13 +75,13 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
         });
       } else {
         setState(() {
-          _aiError = '未設定 API Key，請到設定頁設定';
+          _noApiKey = true;
           _loadingAi = false;
         });
       }
     } catch (e) {
       setState(() {
-        _aiError = 'AI 摘要失敗：$e';
+        _aiRawError = e.toString();
         _loadingAi = false;
       });
     }
@@ -117,8 +120,22 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
+    // Resolve AI status text from state
+    final String aiStatusText;
+    if (_loadingAi) {
+      aiStatusText = l10n.aiSummaryLoading;
+    } else if (_noApiKey) {
+      aiStatusText = l10n.noApiKey;
+    } else if (_aiRawError != null) {
+      aiStatusText = l10n.aiSummaryError(_aiRawError!);
+    } else {
+      aiStatusText = l10n.aiSummaryDone;
+    }
+
     return Scaffold(
-      appBar: AppBar(title: const Text('儲存到學習庫')),
+      appBar: AppBar(title: Text(l10n.saveToVault)),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -135,9 +152,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '連結',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  Text(
+                    l10n.link,
+                    style: const TextStyle(fontSize: 11, color: Colors.grey),
                   ),
                   const SizedBox(height: 4),
                   Text(
@@ -164,19 +181,19 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   _statusRow(
-                    '平台辨識：${_platform.isNotEmpty ? _platform.toUpperCase() : "辨識中..."}',
+                    _platform.isNotEmpty
+                        ? l10n.platformDetected(_platform.toUpperCase())
+                        : l10n.detecting,
                     _platform.isNotEmpty,
                   ),
                   const SizedBox(height: 6),
                   _statusRow(
-                    _loadingMetadata ? 'Metadata 擷取中...' : 'Metadata 擷取完成',
+                    _loadingMetadata ? l10n.metadataLoading : l10n.metadataDone,
                     !_loadingMetadata,
                   ),
                   const SizedBox(height: 6),
                   _statusRow(
-                    _loadingAi
-                        ? 'AI 摘要生成中...'
-                        : _aiError ?? 'AI 摘要完成',
+                    aiStatusText,
                     _aiSummary != null,
                   ),
                 ],
@@ -196,9 +213,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                      'AI 摘要',
-                      style: TextStyle(
+                    Text(
+                      l10n.aiSummary,
+                      style: const TextStyle(
                         fontSize: 12,
                         color: Color(0xFF7FD8BE),
                       ),
@@ -229,9 +246,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    '快速筆記（選填）',
-                    style: TextStyle(fontSize: 11, color: Colors.grey),
+                  Text(
+                    l10n.quickNote,
+                    style: const TextStyle(fontSize: 11, color: Colors.grey),
                   ),
                   TextField(
                     controller: _noteController,
@@ -240,9 +257,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
                       fontSize: 13,
                       color: Colors.white70,
                     ),
-                    decoration: const InputDecoration(
-                      hintText: '輸入筆記...',
-                      hintStyle: TextStyle(color: Colors.grey),
+                    decoration: InputDecoration(
+                      hintText: l10n.noteHint,
+                      hintStyle: const TextStyle(color: Colors.grey),
                       border: InputBorder.none,
                     ),
                   ),
@@ -271,52 +288,49 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
                   ),
                 ),
                 ActionChip(
-                  label: const Text(
-                    '+ 新增標籤',
-                    style: TextStyle(fontSize: 12),
+                  label: Text(
+                    l10n.addNewTag,
+                    style: const TextStyle(fontSize: 12),
                   ),
                   backgroundColor: const Color(0xFF1A1A2E),
                   onPressed: () {
                     showDialog(
                       context: context,
-                      builder:
-                          (ctx) => AlertDialog(
-                            title: const Text('新增標籤'),
-                            content: TextField(
-                              controller: _tagInputController,
-                              autofocus: true,
-                              decoration: const InputDecoration(
-                                hintText: '標籤名稱',
-                              ),
-                              onSubmitted: (_) {
-                                final name = _tagInputController.text.trim();
-                                if (name.isNotEmpty && !_tags.contains(name)) {
-                                  setState(() => _tags.add(name));
-                                }
-                                _tagInputController.clear();
-                                Navigator.pop(ctx);
-                              },
-                            ),
-                            actions: [
-                              TextButton(
-                                onPressed: () => Navigator.pop(ctx),
-                                child: const Text('取消'),
-                              ),
-                              TextButton(
-                                onPressed: () {
-                                  final name =
-                                      _tagInputController.text.trim();
-                                  if (name.isNotEmpty &&
-                                      !_tags.contains(name)) {
-                                    setState(() => _tags.add(name));
-                                  }
-                                  _tagInputController.clear();
-                                  Navigator.pop(ctx);
-                                },
-                                child: const Text('新增'),
-                              ),
-                            ],
+                      builder: (ctx) => AlertDialog(
+                        title: Text(l10n.addTagTitle),
+                        content: TextField(
+                          controller: _tagInputController,
+                          autofocus: true,
+                          decoration: InputDecoration(
+                            hintText: l10n.tagNameHint,
                           ),
+                          onSubmitted: (_) {
+                            final name = _tagInputController.text.trim();
+                            if (name.isNotEmpty && !_tags.contains(name)) {
+                              setState(() => _tags.add(name));
+                            }
+                            _tagInputController.clear();
+                            Navigator.pop(ctx);
+                          },
+                        ),
+                        actions: [
+                          TextButton(
+                            onPressed: () => Navigator.pop(ctx),
+                            child: Text(l10n.cancel),
+                          ),
+                          TextButton(
+                            onPressed: () {
+                              final name = _tagInputController.text.trim();
+                              if (name.isNotEmpty && !_tags.contains(name)) {
+                                setState(() => _tags.add(name));
+                              }
+                              _tagInputController.clear();
+                              Navigator.pop(ctx);
+                            },
+                            child: Text(l10n.add),
+                          ),
+                        ],
+                      ),
                     );
                   },
                 ),
@@ -337,9 +351,9 @@ class _ShareReceiveScreenState extends ConsumerState<ShareReceiveScreen> {
                     borderRadius: BorderRadius.circular(8),
                   ),
                 ),
-                child: const Text(
-                  '儲存',
-                  style: TextStyle(
+                child: Text(
+                  l10n.save,
+                  style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),

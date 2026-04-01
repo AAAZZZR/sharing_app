@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learning_vault/l10n/app_localizations.dart';
 import 'package:learning_vault/screens/home_screen.dart';
 import 'package:learning_vault/screens/tags_screen.dart';
 import 'package:learning_vault/screens/search_screen.dart';
@@ -12,8 +13,10 @@ class LearningVaultApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '學習庫',
+      title: 'Learning Vault',
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: AppLocalizations.localizationsDelegates,
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         brightness: Brightness.dark,
         colorScheme: ColorScheme.dark(
@@ -88,6 +91,8 @@ class _AppShellState extends State<AppShell> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: _screens[_currentIndex],
       bottomNavigationBar: BottomNavigationBar(
@@ -97,11 +102,11 @@ class _AppShellState extends State<AppShell> {
         backgroundColor: const Color(0xFF1A1A2E),
         selectedItemColor: const Color(0xFF7FD8BE),
         unselectedItemColor: Colors.grey,
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: '首頁'),
-          BottomNavigationBarItem(icon: Icon(Icons.label), label: '標籤'),
-          BottomNavigationBarItem(icon: Icon(Icons.search), label: '搜尋'),
-          BottomNavigationBarItem(icon: Icon(Icons.settings), label: '設定'),
+        items: [
+          BottomNavigationBarItem(icon: const Icon(Icons.home), label: l10n.navHome),
+          BottomNavigationBarItem(icon: const Icon(Icons.label), label: l10n.navTags),
+          BottomNavigationBarItem(icon: const Icon(Icons.search), label: l10n.navSearch),
+          BottomNavigationBarItem(icon: const Icon(Icons.settings), label: l10n.navSettings),
         ],
       ),
     );
